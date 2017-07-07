@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    <script src="./bootstrap/js/jquery.js"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .error{
+            border :2px solid  red;
+        }
+        .success{
+            border :2px solid yellow;
+        }
+        .hideAlertMsg{
+            display: none;
+        }
+        .showAlertMsg{
+            display: block;
+        }
+        .container{
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="userName">User Name</label>
+            <input type="text" class="form-control" id="userName" placeholder="User Name"><span class="hideAlertMsg">Please enter the username..</span>
+        </div>
+        <div class="form-group">
+            <label for="regNo">reg number</label>
+            <input type="email" class="form-control" id="regNo" placeholder="reg number"><span class="hideAlertMsg">Please enter the reg number..</span>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="email"><span class="hideAlertMsg">Please enter the email address..</span>
+        </div>
+        <div id="submit" class="btn btn-default">Submit</div>
+
+    </form>
+</div>
+
+<script>
+    var submit = document.getElementById("submit")
+    var userName = document.getElementById("userName");
+    var regNo = document.getElementById("regNo");
+    var email = document.getElementById("email");
+    var allFields = [userName,regNo,email];
+
+    submit.addEventListener("click", function(){
+        for(var i=0; i< allFields.length; i++){
+            checkFields(allFields[i]);
+            }
+    })
+
+           // check the specific field when blur on it..
+    for(var i=0; i< allFields.length; i++){
+        allFields[i].addEventListener("blur", function(){
+            checkFields(this);
+        })
+    };
+
+
+    function checkFields(field){
+        if(!field.value){
+            field.classList.add("error");
+            field.classList.remove("success");
+            field.nextSibling.classList.add("showAlertMsg");
+            field.nextSibling.classList.remove("hideAlertMsg");
+        }
+        else if(field.value){
+            field.classList.add("success");
+            field.classList.remove("error");
+            field.nextSibling.classList.add("hideAlertMsg");
+            field.nextSibling.classList.remove("showAlertMsg");
+        }
+    }
+
+
+</script>
+</body>
+</html>
